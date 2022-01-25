@@ -132,10 +132,3 @@ COPY --from=dunglas/mercure:v0.11 /srv/public /srv/mercure-assets/
 COPY --from=symfony_caddy_builder /usr/bin/caddy /usr/bin/caddy
 COPY --from=symfony_php /srv/app/public public/
 COPY docker/caddy/Caddyfile /etc/caddy/Caddyfile
-
-#create database
-FROM mysql
-
-COPY ./docker/mysql/create-database.sql /docker-entrypoint-initdb.d/
-
-EXPOSE 3306

@@ -60,6 +60,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
+      MYSQL_DATABASE: ${MYSQL_DB:-app}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpw}
 # Mercure is installed as a Caddy module, prevent the Flex recipe from installing another service
 ###> symfony/mercure-bundle ###
