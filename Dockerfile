@@ -37,6 +37,7 @@ RUN set -eux; \
 	docker-php-ext-install -j$(nproc) \
 		intl \
 		zip \
+		pdo_mysql \
 	; \
 	pecl install \
 		apcu-${APCU_VERSION} \
@@ -45,6 +46,7 @@ RUN set -eux; \
 	docker-php-ext-enable \
 		apcu \
 		opcache \
+		pdo_mysql \
 	; \
 	\
 	runDeps="$( \
@@ -130,3 +132,10 @@ COPY --from=dunglas/mercure:v0.11 /srv/public /srv/mercure-assets/
 COPY --from=symfony_caddy_builder /usr/bin/caddy /usr/bin/caddy
 COPY --from=symfony_php /srv/app/public public/
 COPY docker/caddy/Caddyfile /etc/caddy/Caddyfile
+
+#create database
+FROM mysql
+
+COPY ./mysql/create-database.sql /docker-entrypoint-initdb.d
+
+EXPOSE 3306
