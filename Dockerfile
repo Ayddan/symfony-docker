@@ -136,6 +136,6 @@ COPY docker/caddy/Caddyfile /etc/caddy/Caddyfile
 #create database
 FROM mysql
 
-COPY ./mysql/create-database.sql /docker-entrypoint-initdb.d
+COPY ./docker/mysql/create-database.sql /docker-entrypoint-initdb.d 
 
 EXPOSE 3306
