@@ -62,6 +62,9 @@ services:
     environment:
       MYSQL_DATABASE: ${MYSQL_DB:-app}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpw}
+    volumes:
+      - ./mysql:/var/lib/mysql
+
 # Mercure is installed as a Caddy module, prevent the Flex recipe from installing another service
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
